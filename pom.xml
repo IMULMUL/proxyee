@@ -115,6 +115,34 @@
                         </executions>
                     </plugin>
                     <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.3</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>releases</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <!-- Javadoc -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <doclint>none</doclint>
+                        </configuration>
+                    </plugin>
+                    <!-- GPG mvn clean deploy -P release -->
+                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>1.6</version>
@@ -132,17 +160,6 @@
                                 <arg>--pinentry-mode</arg>
                                 <arg>loopback</arg>
                             </gpgArguments>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.8</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>releases</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
                 </plugins>
